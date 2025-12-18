@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.TheDesigners" parent="android:Theme.Material.Light.NoActionBar" />
+<!--    <style name="Theme.TheDesigners" parent="Theme.MaterialComponents.Light.NoActionBar">-->
+<!--        <item name="colorPrimary">@color/green</item>-->
+<!--        <item name="colorPrimaryVariant">@color/green</item>-->
+<!--        <item name="colorOnPrimary">@android:color/white</item>-->
+<!--        <item name="android:statusBarColor">@color/green</item>-->
+<!--    </style>-->
+    <style name="Theme.MySplashScreen" parent ="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">
+            @color/green
+        </item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/screenshot_2025_03_19_111225</item>
+        <item name="postSplashScreenTheme">@style/Theme.SplashScreen</item>
+    </style>
+  //  <style name="Theme.TheDesigners" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
