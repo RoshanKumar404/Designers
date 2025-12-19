@@ -12,7 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.thedesigners.ui.theme.TheDesignersTheme
 
@@ -34,6 +37,7 @@ class MainActivity : ComponentActivity() {
                             name = "Roshan ji",
                             // modifier = Modifier.padding(innerPadding)
                         )
+                        Texts()
                     }
                 }
             }
@@ -46,6 +50,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
         modifier = modifier
+    )
+}
+@Composable
+fun Texts(){
+    Text(
+        text = "You are the roshan", color = Color.Red,
+        fontSize = 32.sp,
+        fontStyle = FontStyle.Italic
     )
 }
 
