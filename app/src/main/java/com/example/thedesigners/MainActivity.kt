@@ -61,10 +61,10 @@ fun Texts(){
     )
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    TheDesignersTheme {
-//        Greeting("Android")
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    TheDesignersTheme {
+        Greeting("Android")
+    }
+}
