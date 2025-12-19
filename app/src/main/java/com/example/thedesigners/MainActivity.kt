@@ -60,7 +60,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun Texts(){
     Text(
         text = "You are the roshan", color = Color.Red,
-        modifier = Modifier.border(width = 10.dp, shape = RoundedCornerShape(10.dp), color = Color.Black).background(Color.Gray).padding(20.dp),
+        modifier = Modifier.border(width = 10.dp, shape = RoundedCornerShape(10.dp), color = Color.Gray).background(Color.Gray).padding(20.dp),
         fontSize = 32.sp,
         fontStyle = FontStyle.Italic
     )
