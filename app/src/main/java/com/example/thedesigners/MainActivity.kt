@@ -24,6 +24,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -108,9 +111,10 @@ fun Texts(){
 }
 @Composable
 fun ImageAndBudtton(){
-val context= LocalContext.current.applicationContext
+    var counter= remember{ mutableIntStateOf(0) }
+//val context= LocalContext.current.applicationContext
     Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = { Toast.makeText(context,"You did right", Toast.LENGTH_SHORT).show()},
+        Button(onClick = { counter.value+=1},
             shape = RoundedCornerShape(size = 19.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red))
         {
@@ -118,6 +122,7 @@ val context= LocalContext.current.applicationContext
                 text = "Press plz"
             )
         }
+        Text(text = counter.value.toString(), fontSize = 30.sp)
         Image(
             painter = painterResource(id = R.drawable.screenshot_2025_03_19_111225)
             , contentDescription = null,
