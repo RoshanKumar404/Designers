@@ -1,9 +1,11 @@
 package com.example.thedesigners
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +18,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,6 +52,7 @@ class MainActivity : ComponentActivity() {
                         contentAlignment = Alignment.Center
                     )
                     {Column {
+                        ImageAndBudtton()
                         Box(
                             modifier = Modifier.height(280.dp).width(200.dp).background(Color.Cyan)
                         ) {
@@ -98,6 +106,24 @@ fun Texts(){
         )
     }
 }
+@Composable
+fun ImageAndBudtton(){
+val context= LocalContext.current.applicationContext
+    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(onClick = { Toast.makeText(context,"You did right", Toast.LENGTH_SHORT).show()},
+            shape = RoundedCornerShape(size = 19.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Red))
+        {
+            Text(
+                text = "Press plz"
+            )
+        }
+        Image(
+            painter = painterResource(id = R.drawable.screenshot_2025_03_19_111225)
+            , contentDescription = null,
+            modifier = Modifier.height(300.dp).width(300.dp))
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -105,5 +131,6 @@ fun GreetingPreview() {
     TheDesignersTheme {
 //        Greeting("Android")
         Texts()
+        ImageAndBudtton()
     }
 }
