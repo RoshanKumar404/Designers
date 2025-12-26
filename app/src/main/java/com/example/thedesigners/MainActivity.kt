@@ -13,12 +13,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeGestures
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
@@ -57,18 +65,30 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
                 lightScrim = Color.Red.toArgb(),
-                darkScrim = Color.Cyan.toArgb()
+                darkScrim = Color.Green.toArgb()
             )
         )
         setContent {
             TheDesignersTheme {
-               Scaffold {innerpadding->
+               Scaffold(
+                   topBar = {
+                       Topbar()
+                   },
+                   contentWindowInsets = WindowInsets.safeGestures
+               ) {padding->
+                   Column(
+                       modifier = Modifier
+                           .padding(padding)
+                           .fillMaxSize()
+                   ) {  }
+
                     Box(
-                        modifier = Modifier.fillMaxSize()
+                      modifier = Modifier
                             .background(Color.Cyan)
-                            .padding(innerpadding),
+                            .padding(padding),
                         contentAlignment = Alignment.Center
                     )
+
                     {Column {
                         ImageAndBudtton()
                         Box(
@@ -152,14 +172,26 @@ fun Topbar(){
     TopAppBar(title = {Text(text="The Designers")},
         navigationIcon = {
             IconButton(onClick = {Toast.makeText(context,"Ugdrade soon", Toast.LENGTH_SHORT).show()}) {
-                Icon(imageVector = Icons.Default.Star, contentDescription = "IDK")
+                Icon(imageVector = Icons.Default.Menu, contentDescription = "IDK")
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = Green,
             titleContentColor = Color.White,
             navigationIconContentColor = Color.White
-        ))
+        ),
+        actions = {
+            IconButton(onClick = { Toast.makeText(context,"Contact", Toast.LENGTH_SHORT).show()}) {
+                Icon(imageVector = Icons.Filled.Person, contentDescription = "Contacts",tint=Color.White,)
+            }
+            IconButton(onClick = { Toast.makeText(context,"Search things",Toast.LENGTH_SHORT).show()}) {
+                Icon(imageVector = Icons.Filled.Search, contentDescription = "search", tint = Color.White)
+            }
+            IconButton(onClick = {Toast.makeText(context,"s", Toast.LENGTH_SHORT).show()}) {
+//MoreVert
+                Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone", tint = Color.White)
+            }
+        })
 }
 
 @Preview(showBackground = true)
