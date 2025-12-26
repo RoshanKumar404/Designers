@@ -31,17 +31,21 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,6 +60,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.thedesigners.ui.theme.Green
 import com.example.thedesigners.ui.theme.TheDesignersTheme
+import kotlinx.coroutines.launch
 import java.nio.file.WatchEvent
 
 class MainActivity : ComponentActivity() {
@@ -84,15 +89,18 @@ class MainActivity : ComponentActivity() {
 
                     Box(
                       modifier = Modifier
-                            .background(Color.Cyan)
-                            .padding(padding),
+                          .background(Color.Cyan)
+                          .padding(padding),
                         contentAlignment = Alignment.Center
                     )
 
                     {Column {
                         ImageAndBudtton()
                         Box(
-                            modifier = Modifier.height(280.dp).width(200.dp).background(Color.Cyan)
+                            modifier = Modifier
+                                .height(280.dp)
+                                .width(200.dp)
+                                .background(Color.Cyan)
                         ) {
                             Text(
                                 text = "this is the box content",
@@ -127,18 +135,22 @@ fun Texts(){
     Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Text(
             text = "jai sri ram", color = Color.Red,
-            modifier = Modifier.border(width = 4.dp, shape = RectangleShape, color = Color.Red)
+            modifier = Modifier
+                .border(width = 4.dp, shape = RectangleShape, color = Color.Red)
                 .padding(20.dp)
         )
         Text(text = "jai roshan")
 
         Text(
             text = "You are the roshan", color = Color.Red,
-            modifier = Modifier.border(
-                width = 10.dp,
-                shape = RoundedCornerShape(10.dp),
-                color = Color.Gray
-            ).background(Color.Gray).padding(20.dp),
+            modifier = Modifier
+                .border(
+                    width = 10.dp,
+                    shape = RoundedCornerShape(10.dp),
+                    color = Color.Gray
+                )
+                .background(Color.Gray)
+                .padding(20.dp),
             fontSize = 32.sp,
             fontStyle = FontStyle.Italic
         )
@@ -161,7 +173,9 @@ fun ImageAndBudtton(){
         Image(
             painter = painterResource(id = R.drawable.screenshot_2025_03_19_111225)
             , contentDescription = null,
-            modifier = Modifier.height(300.dp).width(300.dp))
+            modifier = Modifier
+                .height(300.dp)
+                .width(300.dp))
     }
 }
 
@@ -171,7 +185,7 @@ fun Topbar(){
     val context=LocalContext.current
     TopAppBar(title = {Text(text="The Designers")},
         navigationIcon = {
-            IconButton(onClick = {Toast.makeText(context,"Ugdrade soon", Toast.LENGTH_SHORT).show()}) {
+            IconButton(onClick =  { }) {
                 Icon(imageVector = Icons.Default.Menu, contentDescription = "IDK")
             }
         },
@@ -192,6 +206,38 @@ fun Topbar(){
                 Icon(imageVector = Icons.Filled.Phone, contentDescription = "Phone", tint = Color.White)
             }
         })
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainScreen() {
+
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+
+    val scope = rememberCoroutineScope()
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            DrawerContent(
+                onItemClick = {
+                    scope.launch { drawerState.close() }
+                }
+            )
+        }
+    ) {
+        Scaffold(
+            topBar = {
+                Topbar(
+                    onMenuClick = {
+                        scope.launch { drawerState.open() }
+                    }
+                )
+            }
+        ) { padding ->
+            MainContent(padding)
+        }
+    }
 }
 
 @Preview(showBackground = true)
