@@ -30,71 +30,46 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Drawer(
-    content:@Composable (PaddingValues)->Unit
-){
-    val DrawerState= rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope= rememberCoroutineScope()
-    val context= LocalContext.current
-    ModalNavigationDrawer(
-        drawerContent = {
-            ModalDrawerSheet {
-                Column(
-                    modifier= Modifier.padding(horizontal = 16.dp)
-                        .verticalScroll(rememberScrollState())
-                ) {
-                    Spacer(Modifier.height(12.dp))
-                    Text("Setting",
-                        modifier = Modifier.padding(16.dp),
-                        style = MaterialTheme.typography.titleLarge)
+fun Drawer(onItemClick: () -> Unit) {
 
-                    HorizontalDivider()
-
-                    Text("SubSection", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleMedium)
-                    NavigationDrawerItem(
-                        label = {Text("Colors")},
-                        selected = false,
-                        onClick = { Toast.makeText(context,"just wait", Toast.LENGTH_SHORT).show()}
-                    )
-                    NavigationDrawerItem(
-                        label = {Text("Images")},
-                        selected = false,
-                        onClick = { Toast.makeText(context,
-                            "just wait this will too",
-                            Toast.LENGTH_SHORT)
-                            .show()}
-                    )
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 10.dp))
-                    Text("Paid Section",modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge
-                    )
-                    NavigationDrawerItem(
-                        label = {Text("Ai Editor")},
-                        selected = false,
-                        icon = { Icon(Icons.Outlined.Face,
-                            contentDescription = "AI image generator") },
-                        badge = {Text("model 1")},
-                        onClick = { Toast.makeText(context,"just wait", Toast.LENGTH_SHORT).show()}
-                    )
-                    NavigationDrawerItem(
-                        label = {Text("Ai Editor")},
-                        selected = false,
-                        icon = { Icon(Icons.Outlined.Face,
-                            contentDescription = "AI image generator") },
-                        badge = {Text("model 1")},
-                        onClick = { Toast.makeText(context,"just wait", Toast.LENGTH_SHORT).show()}
-                    )
-                    Spacer(Modifier.height(12.dp))
-                }
-            }
-        },
-        drawerState = DrawerState
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
 
+        Text("Settings", style = MaterialTheme.typography.headlineSmall)
+        Spacer(Modifier.height(12.dp))
+
+        NavigationDrawerItem(
+            label = { Text("Colors") },
+            selected = false,
+            onClick = onItemClick
+        )
+
+        NavigationDrawerItem(
+            label = { Text("Images") },
+            selected = false,
+            onClick = onItemClick
+        )
+
+        HorizontalDivider(Modifier.padding(vertical = 8.dp))
+
+        Text("Premium", style = MaterialTheme.typography.titleMedium)
+
+        NavigationDrawerItem(
+            label = { Text("AI Editor") },
+            selected = false,
+            icon = {
+                Icon(Icons.Outlined.Face, contentDescription = null)
+            },
+            onClick = onItemClick
+        )
     }
 }
 
-@Preview
-@Composable
-fun prev(){
-    Drawer{}
-}
+//@Preview
+//@Composable
+//fun prev(){
+//    Drawer{}
+//}

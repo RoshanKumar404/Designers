@@ -12,6 +12,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -75,49 +76,9 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             TheDesignersTheme {
-               Scaffold(
-                   topBar = {
-                       Topbar()
-                   },
-                   contentWindowInsets = WindowInsets.safeGestures
-               ) {padding->
-                   Column(
-                       modifier = Modifier
-                           .padding(padding)
-                           .fillMaxSize()
-                   ) {  }
+              MainScreen()
 
-                    Box(
-                      modifier = Modifier
-                          .background(Color.Cyan)
-                          .padding(padding),
-                        contentAlignment = Alignment.Center
-                    )
 
-                    {Column {
-                        ImageAndBudtton()
-                        Box(
-                            modifier = Modifier
-                                .height(280.dp)
-                                .width(200.dp)
-                                .background(Color.Cyan)
-                        ) {
-                            Text(
-                                text = "this is the box content",
-                                modifier = Modifier.align(Alignment.Center),
-                                Color.Yellow
-                            )
-                        }
-                        Row {
-                            Greeting(
-                                name = "Roshan ji",
-                                // modifier = Modifier.padding(innerPadding)
-                            )
-                            Texts()
-                        }
-                    }
-                    }
-                }
             }
         }
     }
@@ -181,11 +142,11 @@ fun ImageAndBudtton(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topbar(){
+fun Topbar(onMenuClick:()-> Unit){
     val context=LocalContext.current
     TopAppBar(title = {Text(text="The Designers")},
         navigationIcon = {
-            IconButton(onClick =  { }) {
+            IconButton(onClick =  onMenuClick) {
                 Icon(imageVector = Icons.Default.Menu, contentDescription = "IDK")
             }
         },
@@ -213,13 +174,12 @@ fun Topbar(){
 fun MainScreen() {
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-
     val scope = rememberCoroutineScope()
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            DrawerContent(
+            Drawer(
                 onItemClick = {
                     scope.launch { drawerState.close() }
                 }
@@ -235,18 +195,55 @@ fun MainScreen() {
                 )
             }
         ) { padding ->
-            MainContent(padding)
+
+
+
+
+//            ***********************************************
+            Box(
+                modifier = Modifier
+                    .background(Color.Cyan)
+                    .padding(padding),
+                contentAlignment = Alignment.Center
+            )
+
+            {Column {
+                ImageAndBudtton()
+                Box(
+                    modifier = Modifier
+                        .height(280.dp)
+                        .width(200.dp)
+                        .background(Color.Cyan)
+                ) {
+                    Text(
+                        text = "this is the box content",
+                        modifier = Modifier.align(Alignment.Center),
+                        Color.Yellow
+                    )
+                }
+                Row {
+                    Greeting(
+                        name = "Roshan ji",
+                        // modifier = Modifier.padding(innerPadding)
+                    )
+                    Texts()
+                }
+            }
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TheDesignersTheme {
-//        Greeting("Android")
-//        Texts()
-//        ImageAndBudtton()
-        Topbar()
-    }
-}
+
+
+
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    TheDesignersTheme {
+////        Greeting("Android")
+////        Texts()
+////        ImageAndBudtton()
+//        Topbar()
+//    }
+//}
