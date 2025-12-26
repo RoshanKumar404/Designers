@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.HorizontalDivider
@@ -37,8 +38,11 @@ fun Drawer(onItemClick: () -> Unit) {
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(Modifier.height(12.dp))
+        Text("Designers", modifier = Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)
+        HorizontalDivider()
 
-        Text("Settings", style = MaterialTheme.typography.headlineSmall)
+//        Text("Settings", style = MaterialTheme.typography.headlineSmall)
         Spacer(Modifier.height(12.dp))
 
         NavigationDrawerItem(
@@ -48,14 +52,14 @@ fun Drawer(onItemClick: () -> Unit) {
         )
 
         NavigationDrawerItem(
-            label = { Text("Images") },
+            label = { Text("Image Imports") },
             selected = false,
             onClick = onItemClick
         )
 
         HorizontalDivider(Modifier.padding(vertical = 8.dp))
 
-        Text("Premium", style = MaterialTheme.typography.titleMedium)
+        Text("Premium",Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)
 
         NavigationDrawerItem(
             label = { Text("AI Editor") },
@@ -65,6 +69,13 @@ fun Drawer(onItemClick: () -> Unit) {
             },
             onClick = onItemClick
         )
+        NavigationDrawerItem(
+            label = { Text("Help and feedback") },
+            selected = false,
+            icon = { Icon(Icons.Outlined.Home, contentDescription = null) },
+            onClick = onItemClick,
+        )
+        Spacer(Modifier.height(12.dp))
     }
 }
 
