@@ -3,6 +3,7 @@ package com.example.thedesigners
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
@@ -18,11 +19,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -38,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.thedesigners.ui.theme.Green
 import com.example.thedesigners.ui.theme.TheDesignersTheme
 import java.nio.file.WatchEvent
 
@@ -45,12 +54,18 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                lightScrim = Color.Red.toArgb(),
+                darkScrim = Color.Cyan.toArgb()
+            )
+        )
         setContent {
             TheDesignersTheme {
                Scaffold {innerpadding->
                     Box(
                         modifier = Modifier.fillMaxSize()
+                            .background(Color.Cyan)
                             .padding(innerpadding),
                         contentAlignment = Alignment.Center
                     )
@@ -130,12 +145,30 @@ fun ImageAndBudtton(){
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Topbar(){
+    val context=LocalContext.current
+    TopAppBar(title = {Text(text="The Designers")},
+        navigationIcon = {
+            IconButton(onClick = {Toast.makeText(context,"Ugdrade soon", Toast.LENGTH_SHORT).show()}) {
+                Icon(imageVector = Icons.Default.Star, contentDescription = "IDK")
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Green,
+            titleContentColor = Color.White,
+            navigationIconContentColor = Color.White
+        ))
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     TheDesignersTheme {
 //        Greeting("Android")
-        Texts()
-        ImageAndBudtton()
+//        Texts()
+//        ImageAndBudtton()
+        Topbar()
     }
 }
