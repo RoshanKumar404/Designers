@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AddCircle
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
@@ -26,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,14 +49,16 @@ fun Drawer(onItemClick: () -> Unit) {
         Spacer(Modifier.height(12.dp))
 
         NavigationDrawerItem(
-            label = { Text("Colors") },
+            label = { Text("Colors",color = Color.Green) },
             selected = false,
+            icon = {Icon(Icons.Outlined.Edit, contentDescription = "fsas", tint = Color.Green)},
             onClick = onItemClick
         )
 
         NavigationDrawerItem(
-            label = { Text("Image Imports") },
+            label = { Text("Image Imports", color = Color.Green) },
             selected = false,
+            icon = {Icon(Icons.Outlined.AddCircle, contentDescription = "fsas", tint = Color.Green)},
             onClick = onItemClick
         )
 
@@ -62,17 +67,17 @@ fun Drawer(onItemClick: () -> Unit) {
         Text("Premium",Modifier.padding(16.dp), style = MaterialTheme.typography.titleLarge)
 
         NavigationDrawerItem(
-            label = { Text("AI Editor") },
+            label = { Text("AI Editor",color = Color.Green) },
             selected = false,
             icon = {
-                Icon(Icons.Outlined.Face, contentDescription = null)
+                Icon(Icons.Outlined.Face, contentDescription = null, tint = Color.Green)
             },
             onClick = onItemClick
         )
         NavigationDrawerItem(
-            label = { Text("Help and feedback") },
+            label = { Text("Help and feedback",color = Color.Green) },
             selected = false,
-            icon = { Icon(Icons.Outlined.Home, contentDescription = null) },
+            icon = { Icon(Icons.Outlined.Home, contentDescription = null, tint = Color.Green) },
             onClick = onItemClick,
         )
         Spacer(Modifier.height(12.dp))
