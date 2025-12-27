@@ -13,28 +13,22 @@ import androidx.compose.material.icons.outlined.AddCircle
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+
 @Composable
-fun Drawer(onItemClick: () -> Unit) {
+fun Drawer( onItemClick: (String) -> Unit) {
+//    val navControler= rememberNavController()
+//    val  coroutineScope=rememberCoroutineScope()
+//    val drawerState = rememberDrawerState(DrawerValue.Closed)
 
     Column(
         modifier = Modifier
@@ -52,14 +46,20 @@ fun Drawer(onItemClick: () -> Unit) {
             label = { Text("Colors",color = Color.Green) },
             selected = false,
             icon = {Icon(Icons.Outlined.Edit, contentDescription = "fsas", tint = Color.Green)},
-            onClick = onItemClick
+            onClick = {
+
+                    onItemClick(SealedScreensCode.Colors.Screens)
+
+            }
         )
 
         NavigationDrawerItem(
             label = { Text("Image Imports", color = Color.Green) },
             selected = false,
             icon = {Icon(Icons.Outlined.AddCircle, contentDescription = "fsas", tint = Color.Green)},
-            onClick = onItemClick
+            onClick = {
+                onItemClick(SealedScreensCode.ImageImports.Screens)
+            }
         )
 
         HorizontalDivider(Modifier.padding(vertical = 8.dp))
@@ -72,20 +72,16 @@ fun Drawer(onItemClick: () -> Unit) {
             icon = {
                 Icon(Icons.Outlined.Face, contentDescription = null, tint = Color.Green)
             },
-            onClick = onItemClick
+            onClick = { onItemClick(SealedScreensCode.AiEditor.Screens) }
         )
         NavigationDrawerItem(
             label = { Text("Help and feedback",color = Color.Green) },
             selected = false,
             icon = { Icon(Icons.Outlined.Home, contentDescription = null, tint = Color.Green) },
-            onClick = onItemClick,
+            onClick = { onItemClick(SealedScreensCode.Feedback.Screens) },
         )
         Spacer(Modifier.height(12.dp))
     }
 }
 
-//@Preview
-//@Composable
-//fun prev(){
-//    Drawer{}
-//}
+

@@ -21,7 +21,7 @@ fun AiEditor(){
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Home", fontSize = 40.sp,color = Color.Green
+            Text("AiEditor", fontSize = 40.sp,color = Color.Green
             )
         }
     }

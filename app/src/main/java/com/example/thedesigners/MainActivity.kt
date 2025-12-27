@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGestures
@@ -61,6 +62,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.thedesigners.Deciders.AppNavGraph
+import com.example.thedesigners.Screens.MainScreen
 import com.example.thedesigners.ui.theme.Green
 import com.example.thedesigners.ui.theme.TheDesignersTheme
 import kotlinx.coroutines.launch
@@ -78,7 +86,8 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             TheDesignersTheme {
-              MainScreen()
+                AppNavGraph()
+
 
 
             }
@@ -171,85 +180,18 @@ fun Topbar(onMenuClick:()-> Unit){
         })
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
+
+
+@Preview(showBackground = true)
 @Composable
-fun MainScreen() {
+fun GreetingPreview() {
+    TheDesignersTheme {
+//        Greeting("Android")
+//        Texts()
+//        ImageAndBudtton()
+//        Topbar()
+//        MainScreen()
 
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            ModalDrawerSheet (drawerContainerColor = Color.White){
-
-
-            Drawer(
-                onItemClick = {
-                    scope.launch { drawerState.close() }
-                }
-            )
-        }
-        }
-    ) {
-        Scaffold(
-            topBar = {
-                Topbar(
-                    onMenuClick = {
-                        scope.launch { drawerState.open() }
-                    }
-                )
-            }
-        ) { padding ->
-
-
-
-
-//            ***********************************************
-            Box(
-                modifier = Modifier
-                    .background(Color.Cyan)
-                    .padding(padding),
-                contentAlignment = Alignment.Center
-            )
-
-            {Column {
-                ImageAndBudtton()
-                Box(
-                    modifier = Modifier
-                        .height(280.dp)
-                        .width(200.dp)
-                        .background(Color.Cyan)
-                ) {
-                    Text(
-                        text = "this is the box content",
-                        modifier = Modifier.align(Alignment.Center),
-                        Color.Yellow
-                    )
-                }
-                Row {
-                    Greeting(
-                        name = "Roshan ji",
-                        // modifier = Modifier.padding(innerPadding)
-                    )
-                    Texts()
-                }
-            }
-            }
-        }
     }
 }
-
-
-
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    TheDesignersTheme {
-////        Greeting("Android")
-////        Texts()
-////        ImageAndBudtton()
-//        Topbar()
-//    }
-//}
