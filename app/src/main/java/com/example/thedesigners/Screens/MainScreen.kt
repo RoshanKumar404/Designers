@@ -22,9 +22,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.thedesigners.Bottombar
 import com.example.thedesigners.Drawer
 import com.example.thedesigners.Greeting
 import com.example.thedesigners.ImageAndBudtton
+import com.example.thedesigners.Screens.BottomScreens.Profile
+import com.example.thedesigners.Screens.BottomScreens.Search
 import com.example.thedesigners.SealedScreens
 import com.example.thedesigners.Texts
 import com.example.thedesigners.Topbar
@@ -35,7 +41,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(navController: NavHostController) {
 
-
+//val navController= rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 //    val navController = rememberNavController()
@@ -73,6 +79,9 @@ fun MainScreen(navController: NavHostController) {
                         scope.launch { drawerState.open() }
                     }
                 )
+            },
+            bottomBar = {
+                Bottombar(navController)
             }
         ) { padding ->
 //
@@ -111,6 +120,7 @@ fun MainScreen(navController: NavHostController) {
                 }
             }
             }
+
         }
     }
 }
