@@ -25,7 +25,7 @@ import androidx.navigation.NavHostController
 import com.example.thedesigners.Drawer
 import com.example.thedesigners.Greeting
 import com.example.thedesigners.ImageAndBudtton
-import com.example.thedesigners.SealedScreensCode
+import com.example.thedesigners.SealedScreens
 import com.example.thedesigners.Texts
 import com.example.thedesigners.Topbar
 import com.example.thedesigners.ui.theme.Green
@@ -56,7 +56,7 @@ fun MainScreen(navController: NavHostController) {
                         scope.launch()
                         { drawerState.close()
                             navController.navigate(Screens){
-                                popUpTo(SealedScreensCode.Main.Screens)
+                                popUpTo(SealedScreens.Main.Screens)
                                 launchSingleTop=true
                             }}
                     },

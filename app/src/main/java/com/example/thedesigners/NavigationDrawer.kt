@@ -1,8 +1,6 @@
 package com.example.thedesigners
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -48,7 +46,7 @@ fun Drawer( onItemClick: (String) -> Unit) {
             icon = {Icon(Icons.Outlined.Edit, contentDescription = "fsas", tint = Color.Green)},
             onClick = {
 
-                    onItemClick(SealedScreensCode.Colors.Screens)
+                    onItemClick(SealedScreens.Colors.Screens)
 
             }
         )
@@ -58,7 +56,7 @@ fun Drawer( onItemClick: (String) -> Unit) {
             selected = false,
             icon = {Icon(Icons.Outlined.AddCircle, contentDescription = "fsas", tint = Color.Green)},
             onClick = {
-                onItemClick(SealedScreensCode.ImageImports.Screens)
+                onItemClick(SealedScreens.ImageImports.Screens)
             }
         )
 
@@ -72,13 +70,13 @@ fun Drawer( onItemClick: (String) -> Unit) {
             icon = {
                 Icon(Icons.Outlined.Face, contentDescription = null, tint = Color.Green)
             },
-            onClick = { onItemClick(SealedScreensCode.AiEditor.Screens) }
+            onClick = { onItemClick(SealedScreens.AiEditor.Screens) }
         )
         NavigationDrawerItem(
             label = { Text("Help and feedback",color = Color.Green) },
             selected = false,
             icon = { Icon(Icons.Outlined.Home, contentDescription = null, tint = Color.Green) },
-            onClick = { onItemClick(SealedScreensCode.Feedback.Screens) },
+            onClick = { onItemClick(SealedScreens.Feedback.Screens) },
         )
         Spacer(Modifier.height(12.dp))
     }

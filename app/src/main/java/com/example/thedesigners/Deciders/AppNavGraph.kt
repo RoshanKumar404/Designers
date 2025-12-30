@@ -5,35 +5,47 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
+import com.example.thedesigners.Screens.BottomScreens.Notification
+import com.example.thedesigners.Screens.BottomScreens.Profile
+import com.example.thedesigners.Screens.BottomScreens.Search
 //import com.example.thedesigners.MainScreen
 import com.example.thedesigners.Screens.DrwawerScreens.AiEditor
 import com.example.thedesigners.Screens.DrwawerScreens.Colors
 import com.example.thedesigners.Screens.DrwawerScreens.Feedback
 import com.example.thedesigners.Screens.DrwawerScreens.ImageImports
 import com.example.thedesigners.Screens.MainScreen
-import com.example.thedesigners.SealedScreensCode
+import com.example.thedesigners.SealedScreens
 
 @Composable
 fun AppNavGraph(){
     val navController= rememberNavController()
     NavHost(
         navController=navController,
-                startDestination = SealedScreensCode.Main.Screens
+                startDestination = SealedScreens.Main.Screens
     ){
-        composable(SealedScreensCode.Main.Screens){
+        composable(SealedScreens.Main.Screens){
             MainScreen(navController)
         }
-        composable(SealedScreensCode.Colors.Screens) {
+        composable(SealedScreens.Colors.Screens) {
             Colors()
         }
-        composable (SealedScreensCode.AiEditor.Screens){
+        composable (SealedScreens.AiEditor.Screens){
             AiEditor()
         }
-        composable(SealedScreensCode.ImageImports.Screens) {
+        composable(SealedScreens.ImageImports.Screens) {
             ImageImports()
         }
-        composable(SealedScreensCode.Feedback.Screens) {
+        composable(SealedScreens.Feedback.Screens) {
             Feedback()
+        }
+        composable(SealedScreens.Notification.Screens) {
+            Notification()
+        }
+        composable (SealedScreens.Search.Screens){
+            Search()
+        }
+        composable(SealedScreens.Profile.Screens) {
+            Profile()
         }
 
 
