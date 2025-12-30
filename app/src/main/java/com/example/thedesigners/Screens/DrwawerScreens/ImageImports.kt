@@ -1,4 +1,5 @@
-package com.example.thedesigners.Screens
+package com.example.thedesigners.Screens.DrwawerScreens
+
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -10,27 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.thedesigners.ui.theme.TheDesignersTheme
 
 @Composable
-fun Feedback(){
+fun ImageImports(){
     Box(modifier = Modifier.fillMaxSize()){
         Column(modifier = Modifier.fillMaxSize()
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Feedback", fontSize = 40.sp,color = Color.Green
+            Text("ImageImports", fontSize = 40.sp,color = Color.Green
             )
         }
     }
 }
 @Preview
 @Composable
-fun Feed(){
+fun imagePrev(){
     TheDesignersTheme {
-      Feedback()
+        ImageImports()
     }
 }
