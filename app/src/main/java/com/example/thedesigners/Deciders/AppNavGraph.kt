@@ -65,7 +65,7 @@ fun AppNavGraph() {
                     modifier = Modifier
                         .background(Green)
                         .fillMaxWidth()
-                        .height(70.dp)
+                        .height(65.dp)
                 )
 
                 Drawer(

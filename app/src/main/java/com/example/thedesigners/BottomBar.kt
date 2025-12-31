@@ -55,7 +55,7 @@ fun Bottombar(navController: NavController)
                 imageVector = Icons.Default.Home,
                 contentDescription = "Home",
                 modifier = Modifier.size(30.dp),
-                tint = if (currentRoute== SealedScreens.Main.Screens) Color.White else Color.Green
+                tint = if (currentRoute== SealedScreens.Main.Screens) Color.White else Color.Black
             )
         }
         IconButton(onClick = {
@@ -70,7 +70,7 @@ fun Bottombar(navController: NavController)
                 imageVector = Icons.Default.Person,
                 contentDescription = "Profile",
                 modifier = Modifier.size(30.dp),
-                tint = if (currentRoute== SealedScreens.Profile.Screens) Color.White else Color.Green
+                tint = if (currentRoute== SealedScreens.Profile.Screens) Color.White else Color.Black
             )
         }
         Box(Modifier
@@ -84,7 +84,7 @@ fun Bottombar(navController: NavController)
                     .makeText(context,"jai sri ram",
                         Toast.LENGTH_SHORT)
                     .show()} ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(30.dp), tint = Green)
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(30.dp), tint = Color.Black)
 
             }
 
@@ -102,9 +102,10 @@ fun Bottombar(navController: NavController)
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search",
 
-                tint = if (currentRoute== SealedScreens.Search.Screens) Color.White else Color.Green
+                tint = if (currentRoute== SealedScreens.Search.Screens) Color.White else Color.Black
             )
         }
+        // this screen is not created its just dummy
         IconButton(onClick = {
             navController.navigate(SealedScreens.Search.Screens){
                 popUpTo(SealedScreens.Profile.Screens){
@@ -118,7 +119,7 @@ fun Bottombar(navController: NavController)
                 imageVector = Icons.Default.Favorite,
                 contentDescription = "Liked",
 
-                tint = if (currentRoute== SealedScreens.Search.Screens) Color.White else Color.Green
+                tint = if (currentRoute== SealedScreens.Search.Screens) Color.White else Color.Black
             )
         }
     }
