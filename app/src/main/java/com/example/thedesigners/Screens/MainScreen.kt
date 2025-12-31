@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -39,89 +40,62 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavHostController) {
+fun MainScreen() {
 
 //val navController= rememberNavController()
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-//    val navController = rememberNavController()
+//    val drawerState = rememberDrawerState(DrawerValue.Closed)
+//    val scope = rememberCoroutineScope()
+////    val navController = rememberNavController()
 
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        gesturesEnabled = true,
-        drawerContent = {
-            ModalDrawerSheet (drawerContainerColor = Color.White){
-                Box(modifier = Modifier
-                    .background(Green)
-                    .fillMaxWidth()
-                    .height(60.dp)
-                )
 
-                Drawer(
-                    onItemClick = { Screens->
-                        scope.launch()
-                        { drawerState.close()
-                            navController.navigate(Screens){
-                                popUpTo(SealedScreens.Main.Screens)
-                                launchSingleTop=true
-                            }}
-                    },
-//                navController = navController
-                )
+        Column(modifier = Modifier.fillMaxSize()) {
 
-            }
-        }
-    ) {
-        Scaffold(
-            topBar = {
-                Topbar(
-                    onMenuClick = {
-                        scope.launch { drawerState.open() }
-                    }
-                )
-            },
-            bottomBar = {
-                Bottombar(navController)
-            }
-        ) { padding ->
+//                Topbar(
+//                    onMenuClick = {
+//                        scope.launch { drawerState.open() }
+//                    }
+//                )
+
+
 //
 
 
-
-
 //            ***********************************************
-            Box(
-                modifier = Modifier
-                    .background(Color.Cyan)
-                    .padding(padding),
-                contentAlignment = Alignment.Center
-            )
-
-            {Column {
-                ImageAndBudtton()
                 Box(
                     modifier = Modifier
-                        .height(280.dp)
-                        .width(200.dp)
                         .background(Color.Cyan)
-                ) {
-                    Text(
-                        text = "this is the box content",
-                        modifier = Modifier.align(Alignment.Center),
-                        Color.Yellow
-                    )
-                }
-                Row {
-                    Greeting(
-                        name = "Roshan ji",
-                        // modifier = Modifier.padding(innerPadding)
-                    )
-                    Texts()
-                }
-            }
-            }
+                        .weight(1f)
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                )
 
+                {
+                    Column {
+                        ImageAndBudtton()
+                        Box(
+                            modifier = Modifier
+                                .height(280.dp)
+                                .width(200.dp)
+                                .background(Color.Cyan)
+                        ) {
+                            Text(
+                                text = "this is the box content",
+                                modifier = Modifier.align(Alignment.Center),
+                                Color.Yellow
+                            )
+                        }
+                        Row {
+                            Greeting(
+                                name = "Roshan ji",
+                                // modifier = Modifier.padding(innerPadding)
+                            )
+                            Texts()
+                        }
+                    }
+                }
+
+            }
         }
-    }
-}
+
+
 
