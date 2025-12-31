@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.safeGestures
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
@@ -146,6 +147,7 @@ fun ImageAndBudtton(){
             painter = painterResource(id = R.drawable.screenshot_2025_03_19_111225)
             , contentDescription = null,
             modifier = Modifier
+                .padding(20.dp)
                 .height(300.dp)
                 .width(300.dp))
     }
