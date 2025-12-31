@@ -1,6 +1,8 @@
 package com.example.thedesigners
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsEndWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -11,27 +13,37 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.thedesigners.ui.theme.Green
+import com.example.thedesigners.ui.theme.TheDesignersTheme
 import com.google.android.material.bottomappbar.BottomAppBar
+import java.nio.file.WatchEvent
 
 @Composable
 fun Bottombar(navController: NavController)
 {
     val currentRoute=navController.currentBackStackEntryAsState().value?.destination?.route
-    BottomAppBar(containerColor = Green){
+    BottomAppBar(containerColor = Green, ){
         IconButton(onClick = {
             navController.navigate(SealedScreens.Main.Screens){
                 popUpTo(SealedScreens.Main.Screens){
                     inclusive=false
                 }
             }
-        }) {
+         },
+            modifier = Modifier.weight(1f)
+        ) {
             Icon(
                 imageVector = Icons.Default.Home,
                 contentDescription = "Home",
+                modifier = Modifier.size(30.dp),
                 tint = if (currentRoute== SealedScreens.Main.Screens) Color.White else Color.Green
             )
         }
@@ -41,10 +53,12 @@ fun Bottombar(navController: NavController)
                     inclusive=false
                 }
             }
-        }) {
+        },
+            modifier = Modifier.weight(1f)) {
             Icon(
                 imageVector = Icons.Default.Person,
                 contentDescription = "Profile",
+                modifier = Modifier.size(30.dp),
                 tint = if (currentRoute== SealedScreens.Profile.Screens) Color.White else Color.Green
             )
         }
@@ -54,12 +68,23 @@ fun Bottombar(navController: NavController)
                     inclusive=false
                 }
             }
-        }) {
+        },
+            modifier = Modifier.weight(1f)
+        ) {
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "Search",
+
                 tint = if (currentRoute== SealedScreens.Search.Screens) Color.White else Color.Green
             )
         }
+    }
+}
+@Preview
+@Composable
+fun Pre(){
+    val navController=rememberNavController()
+    TheDesignersTheme {
+        Bottombar(navController)
     }
 }
