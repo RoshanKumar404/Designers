@@ -6,16 +6,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.* // Added all Material3 components
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.thedesigners.BottomSheetContent
 import com.example.thedesigners.Bottombar
 import com.example.thedesigners.Drawer
 import com.example.thedesigners.Screens.BottomScreens.Notification
@@ -28,7 +33,7 @@ import com.example.thedesigners.Screens.DrwawerScreens.ImageImports
 import com.example.thedesigners.Screens.MainScreen
 import com.example.thedesigners.SealedScreens
 import com.example.thedesigners.Topbar
-import com.example.thedesigners.ui.theme.Green // Ensure this exists in your theme
+import com.example.thedesigners.ui.theme.Green
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,6 +48,21 @@ fun AppNavGraph() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute= navBackStackEntry?.destination?.route
 
+    //this is for the bottomsheet
+    val sheetState= rememberModalBottomSheetState()
+    var showBottomsheet by remember {
+        mutableStateOf(false)
+    }
+
+    if (showBottomsheet){
+        ModalBottomSheet(
+            onDismissRequest = {showBottomsheet=false},
+            sheetState=sheetState,
+            containerColor = Color.White
+        ) {
+            BottomSheetContent(onClose={showBottomsheet=false})
+        }
+    }
 
     //defining which screens should show the bars ->>
     // obviously the mainscreen
@@ -95,7 +115,7 @@ fun AppNavGraph() {
             },
             bottomBar = {
                 if (showbars){
-                    Bottombar(navController = navController)
+                    Bottombar(navController = navController, onFabClick = {showBottomsheet=true })
                 }
 
             }
@@ -107,7 +127,7 @@ fun AppNavGraph() {
                 modifier = Modifier.padding(if (showbars)innerPadding else PaddingValues(0.dp))
             ) {
                 composable(SealedScreens.Main.Screens) {
-                    MainScreen() // Pass navController here
+                    MainScreen()
                 }
                 composable(SealedScreens.Colors.Screens) { Colors() }
                 composable(SealedScreens.AiEditor.Screens) { AiEditor() }
@@ -117,6 +137,9 @@ fun AppNavGraph() {
                 composable(SealedScreens.Search.Screens) { Search() }
                 composable(SealedScreens.Profile.Screens) { Profile() }
             }
+
         }
+
+
     }
 }

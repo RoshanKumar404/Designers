@@ -1,32 +1,53 @@
 package com.example.thedesigners
 
+import android.R
+import android.hardware.camera2.CameraExtensionSession
 import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -37,7 +58,8 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import java.nio.file.WatchEvent
 
 @Composable
-fun Bottombar(navController: NavController)
+fun Bottombar(navController: NavController,
+              onFabClick:()-> Unit)
 {
     val context= LocalContext.current
     val currentRoute=navController.currentBackStackEntryAsState().value?.destination?.route
@@ -80,10 +102,9 @@ fun Bottombar(navController: NavController)
 
         ){
             FloatingActionButton(onClick =
-                { Toast
-                    .makeText(context,"jai sri ram",
-                        Toast.LENGTH_SHORT)
-                    .show()} ) {
+                {
+                    onFabClick()
+                } ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add", modifier = Modifier.size(30.dp), tint = Color.Black)
 
             }
@@ -123,12 +144,46 @@ fun Bottombar(navController: NavController)
             )
         }
     }
+
+}
+@Composable
+fun BottomSheetItem(Icon: ImageVector,title: String,onClick:()->Unit){
+    Row(verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable{onClick()}) {
+        Icon(Icon, contentDescription = "jain", tint = Color.Black,)
+        Spacer(Modifier.height(10.dp))
+        Text(
+            title, color = Green, fontSize = 32.sp, fontWeight = FontWeight.Medium
+        )
+    }
+}
+@Composable
+fun BottomSheetContent(onClose:()-> Unit){
+    Column(
+        Modifier.fillMaxWidth()
+            .padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        BottomSheetItem(Icon = Icons.Default.Create, title = "Create A Post") {
+            /* Handle Click */
+        }
+        BottomSheetItem(Icon = Icons.Default.Share, title = "Share with Friends") {
+            /* Handle Click */
+        }
+        BottomSheetItem(Icon = Icons.Default.Settings, title = "Project Settings") {
+            /* Handle Click */
+        }
+    }
 }
 @Preview
 @Composable
 fun Pre(){
     val navController=rememberNavController()
     TheDesignersTheme {
-        Bottombar(navController)
+//        Bottombar(navController, onFabClick={})
+        BottomSheetContent {  }
     }
 }
