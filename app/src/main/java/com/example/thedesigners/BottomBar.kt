@@ -22,9 +22,11 @@ import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -56,6 +58,9 @@ import com.example.thedesigners.ui.theme.Green
 import com.example.thedesigners.ui.theme.TheDesignersTheme
 import com.google.android.material.bottomappbar.BottomAppBar
 import java.nio.file.WatchEvent
+
+//private val Icons.Filled.Videocam: ImageVector
+//private val Icons.Filled.CameraAlt: ImageVector
 
 @Composable
 fun Bottombar(navController: NavController,
@@ -178,10 +183,13 @@ fun BottomSheetContent(onClose:()-> Unit,
             onClose()
 
         }
-        BottomSheetItem(Icon = Icons.Default.Share, title = "Share with Friends") {
+        BottomSheetItem(Icon = Icons.Default.Favorite, title = "Add a Story") {
             /* Handle Click */
         }
-        BottomSheetItem(Icon = Icons.Default.Settings, title = "Project Settings") {
+        BottomSheetItem(Icon = Icons.Default.Star, title = "Create a Reel") {
+            /* Handle Click */
+        }
+        BottomSheetItem(Icon = Icons.Filled.PlayArrow, title = "Go Live") {
             /* Handle Click */
         }
     }
