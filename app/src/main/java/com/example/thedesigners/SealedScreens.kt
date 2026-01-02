@@ -9,5 +9,6 @@ sealed class  SealedScreens(val Screens: String){
     data object Notification:SealedScreens("Notification")
     data object Profile:SealedScreens("Profile")
     data object Search: SealedScreens("Search")
+    data object  Post: SealedScreens("Post")
 }
 

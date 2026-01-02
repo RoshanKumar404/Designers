@@ -1,7 +1,5 @@
 package com.example.thedesigners.Screens
 
-//package com.example.thedesigners.Screens.DrwawerScreens
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

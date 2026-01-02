@@ -161,14 +161,22 @@ fun BottomSheetItem(Icon: ImageVector,title: String,onClick:()->Unit){
     }
 }
 @Composable
-fun BottomSheetContent(onClose:()-> Unit){
+fun BottomSheetContent(onClose:()-> Unit,
+                       navController: NavController){
     Column(
         Modifier.fillMaxWidth()
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        BottomSheetItem(Icon = Icons.Default.Create, title = "Create A Post") {
-            /* Handle Click */
+        BottomSheetItem(Icon = Icons.Default.Create, title = "Create A Post" ){
+
+              navController.navigate(SealedScreens.Post.Screens){
+                  popUpTo(SealedScreens.Main.Screens){
+                      inclusive=false
+                  }
+              }
+            onClose()
+
         }
         BottomSheetItem(Icon = Icons.Default.Share, title = "Share with Friends") {
             /* Handle Click */
@@ -178,12 +186,12 @@ fun BottomSheetContent(onClose:()-> Unit){
         }
     }
 }
-@Preview
-@Composable
-fun Pre(){
-    val navController=rememberNavController()
-    TheDesignersTheme {
-//        Bottombar(navController, onFabClick={})
-        BottomSheetContent {  }
-    }
-}
+//@Preview
+//@Composable
+//fun Pre(){
+//    val navController=rememberNavController()
+//    TheDesignersTheme {
+////        Bottombar(navController, onFabClick={})
+//        BottomSheetContent {  }
+//    }
+//}

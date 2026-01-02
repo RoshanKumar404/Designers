@@ -31,6 +31,7 @@ import com.example.thedesigners.Screens.DrwawerScreens.Colors
 import com.example.thedesigners.Screens.DrwawerScreens.Feedback
 import com.example.thedesigners.Screens.DrwawerScreens.ImageImports
 import com.example.thedesigners.Screens.MainScreen
+import com.example.thedesigners.Screens.Post
 import com.example.thedesigners.SealedScreens
 import com.example.thedesigners.Topbar
 import com.example.thedesigners.ui.theme.Green
@@ -60,7 +61,7 @@ fun AppNavGraph() {
             sheetState=sheetState,
             containerColor = Color.White
         ) {
-            BottomSheetContent(onClose={showBottomsheet=false})
+            BottomSheetContent(onClose={showBottomsheet=false},navController)
         }
     }
 
@@ -136,6 +137,7 @@ fun AppNavGraph() {
                 composable(SealedScreens.Notification.Screens) { Notification() }
                 composable(SealedScreens.Search.Screens) { Search() }
                 composable(SealedScreens.Profile.Screens) { Profile() }
+                composable ( SealedScreens.Post.Screens ){ Post() }
             }
 
         }
