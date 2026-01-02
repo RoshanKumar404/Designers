@@ -90,9 +90,11 @@ fun Bottombar(navController: NavController,
         }
         IconButton(onClick = {
             navController.navigate(SealedScreens.Profile.Screens){
-                popUpTo(SealedScreens.Profile.Screens){
-                    inclusive=false
+                popUpTo(SealedScreens.Main.Screens){
+                  saveState=true
                 }
+                launchSingleTop=true
+                restoreState=true
             }
         },
             modifier = Modifier.weight(1f)) {
@@ -120,9 +122,11 @@ fun Bottombar(navController: NavController,
         }
         IconButton(onClick = {
             navController.navigate(SealedScreens.Search.Screens){
-                popUpTo(SealedScreens.Profile.Screens){
-                    inclusive=false
+                popUpTo(SealedScreens.Main.Screens){
+                    saveState=true
                 }
+                launchSingleTop=true
+                restoreState=true
             }
          },
             modifier = Modifier.weight(1f)

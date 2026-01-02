@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.thedesigners.BottomSheetContent
 import com.example.thedesigners.Bottombar
 import com.example.thedesigners.Drawer
+import com.example.thedesigners.Screens.Authentication.Login
 import com.example.thedesigners.Screens.BottomScreens.Notification
 import com.example.thedesigners.Screens.BottomScreens.Profile
 import com.example.thedesigners.Screens.BottomScreens.Search
@@ -40,7 +41,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavGraph() {
-
+    val SkipLogin=true
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -124,12 +125,21 @@ fun AppNavGraph() {
             // The NavHost now switches ONLY the middle content
             NavHost(
                 navController = navController,
-                startDestination = SealedScreens.Main.Screens,
+                startDestination = if (SkipLogin) SealedScreens.Login.Screens else SealedScreens.Login.Screens,
                 modifier = Modifier.padding(if (showbars)innerPadding else PaddingValues(0.dp))
             ) {
-                composable(SealedScreens.Main.Screens) {
-                    MainScreen()
+                composable(SealedScreens.Login.Screens) {
+//                    MainScreen()
+                    Login(
+                        onLoginSuccess = {
+                            // 2. Navigate to Main and POP the login screen so user can't go back to it
+                            navController.navigate(SealedScreens.Main.Screens) {
+                                popUpTo(SealedScreens.Login.Screens) { inclusive = true }
+                            }
+                        }
+                    )
                 }
+                composable (SealedScreens.Main.Screens){ MainScreen()  }
                 composable(SealedScreens.Colors.Screens) { Colors() }
                 composable(SealedScreens.AiEditor.Screens) { AiEditor() }
                 composable(SealedScreens.ImageImports.Screens) { ImageImports() }
@@ -138,6 +148,7 @@ fun AppNavGraph() {
                 composable(SealedScreens.Search.Screens) { Search() }
                 composable(SealedScreens.Profile.Screens) { Profile() }
                 composable ( SealedScreens.Post.Screens ){ Post() }
+
             }
 
         }

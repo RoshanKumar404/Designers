@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.thedesigners.ui.theme.Green
 import com.example.thedesigners.ui.theme.TheDesignersTheme
 import java.nio.file.WatchEvent
@@ -119,10 +120,10 @@ private  fun authentication(username: String, pasword:String): Boolean{
     val validUserPassword="Roshan!@#"
     return username==validUsernam && pasword==validUserPassword
 }
-@Preview
-@Composable
-fun Prev(){
-    TheDesignersTheme {
-        Login(onLoginSuccess = {})
-    }
-}
+//@Preview
+//@Composable
+//fun Prev(){
+//    TheDesignersTheme {
+//        Login(onLoginSuccess = {})
+//    }
+//}
