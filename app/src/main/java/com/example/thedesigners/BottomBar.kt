@@ -3,6 +3,7 @@ package com.example.thedesigners
 import android.R
 import android.hardware.camera2.CameraExtensionSession
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -33,6 +35,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -154,14 +157,18 @@ fun Bottombar(navController: NavController,
 @Composable
 fun BottomSheetItem(Icon: ImageVector,title: String,onClick:()->Unit){
     Row(verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
+       // horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable{onClick()}) {
-        Icon(Icon, contentDescription = "jain", tint = Color.Black,)
-        Spacer(Modifier.height(10.dp))
+            .clickable{onClick()}
+            .padding(horizontal = 20.dp, vertical = 12.dp)) {
+        Icon(Icon, contentDescription = "jain", tint = Color.Black, modifier = Modifier.size(34.dp))
+        Spacer(Modifier.width(10.dp))
         Text(
-            title, color = Green, fontSize = 32.sp, fontWeight = FontWeight.Medium
+            title, color = Green,
+            fontSize = 28.sp,
+            style = MaterialTheme.typography.bodyLarge
+
         )
     }
 }
@@ -173,7 +180,15 @@ fun BottomSheetContent(onClose:()-> Unit,
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        BottomSheetItem(Icon = Icons.Default.Create, title = "Create A Post" ){
+//        Box(
+//            modifier = Modifier
+//                .align(Alignment.CenterHorizontally)
+//                .padding(bottom = 16.dp)
+//                .width(40.dp)
+//                .height(4.dp)
+//                .background(Color.LightGray, shape = CircleShape)
+//        )
+               BottomSheetItem(Icon = Icons.Default.Create, title = "Create A Post" ){
 
               navController.navigate(SealedScreens.Post.Screens){
                   popUpTo(SealedScreens.Main.Screens){
@@ -194,12 +209,14 @@ fun BottomSheetContent(onClose:()-> Unit,
         }
     }
 }
-//@Preview
-//@Composable
-//fun Pre(){
-//    val navController=rememberNavController()
-//    TheDesignersTheme {
-////        Bottombar(navController, onFabClick={})
-//        BottomSheetContent {  }
-//    }
-//}
+
+@Preview
+@Composable
+fun Pre(){
+    val navController=rememberNavController()
+    TheDesignersTheme {
+//        Bottombar(navController, onFabClick={})
+        BottomSheetContent(onClose={},
+        navController=navController)
+    }
+}
